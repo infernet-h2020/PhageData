@@ -1,0 +1,13 @@
+name = "PhageData"
+uuid = "d31ffc6c-e5ec-11e8-2b23-85cc4aa159d7"
+authors = ["Jorge Fernandez-de-Cossio-Diaz <j.cossio.diaz@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+PhageBase = "d6599100-c4f8-11e8-3fbb-eb82a55b1af5"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
