@@ -29,7 +29,7 @@ default:
 
     # dependencies
 #    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"git@gitlab.com:PhageDisplayInference/PhageBase.jl.git\"))"
-    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"git@gitlab.com:PhageDisplayInference/PhageSim.jl.git\"))"
+#    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"git@gitlab.com:PhageDisplayInference/PhageSim.jl.git\"))"
 #    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"https://github.com/cossio/LambertWExp.jl.git\"))"
 
     - julia -e "import Pkg; Pkg.develop(Pkg.PackageSpec(; path=pwd(), name=\"PhageData\"))"
