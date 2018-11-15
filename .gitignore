@@ -9,3 +9,5 @@ deps/deps.jl
 
 
 data/
+deps/
+!deps/build.jl
