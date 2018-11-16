@@ -54,7 +54,7 @@ end
 "Download the Boyer 2016 PNAS paper dataset"
 function boyer2016pnas_download()
     run(`mkdir -p $boyer2016pnas_dir`)
-    unrtf = string(@__DIR__, "../deps/unrtf-0.21.9-build/bin/unrtf")
+    unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
     for i = 2 : 19
         dd = lpad(i, 2, '0')
         @info "downloading pnas.1517813113.sd$dd.rtf"
