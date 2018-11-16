@@ -16,10 +16,6 @@ function rubin2017genbio()
         rubin2017genbio_download()
     end
 
-    if !rubin2017genbio_processed()
-        rubin2017genbio_process()
-    end
-
     #= load dataset into Julia =#
 
     df00 = readcounts(rubin2017genbio_dir * "/SRR4293387.fastq.prot.counts")  # initial library
@@ -84,8 +80,6 @@ end
 
 "returns true if the Rubin2017 data has been downloaded"
 rubin2017genbio_downloaded() = isfile(rubin2017genbio_dir * "/downloaded.txt")
-"returns true if the Rubin2017 data has been processed"
-rubin2017genbio_processed() = isfile(rubin2017genbio_dir * "/processed.txt")
 
 
 """
@@ -97,12 +91,77 @@ Download the Rubin 2017 Gen. Bio. paper dataset.
 function rubin2017genbio_download()
     run(`mkdir -p $rubin2017genbio_dir`)
     fastqdump = string(@__DIR__, "../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
+
+    "alignment score model used by Fowler2010"
+    const fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
+
     for id = 87 : 93
         # TODO: consider doing this loop parallel
         srr = "SRR42933" * string(id)
+
         @info "Downloading $srr"
         run(`$fastqdump -v $srr`)
+
+        @info "Converting to protein sequences"
+        
+        open("$srr.fastq", "r") do stream
+            fastq = BioSequences.FASTQ.Reader(stream; fill_ambiguous = nothing)
+            open("$srr.fastq.prot", "w") do out
+                for (iter, r) in enumerate(fastq)
+                    # quality scores
+                    q = BioSequences.FASTQ.quality(r, :illumina18)
+
+                    # all nucleotides have quality ≥ 20?
+                    minimum(q) ≥ 20 || continue
+
+                    s = BioSequences.FASTQ.sequence(r)
+                    @assert length(q) == length(s) == 75
+
+                    #= The 12 nucleotides (= 4 amino acids) sequence
+                    fits in the forward and backward directions in the
+                    75 read, plus some constant segments that we ignore. =#
+                    qf, qr = q[1:12], reverse(q[51:62])
+                    sf, sr = s[1:12], BioSequences.reverse_complement(s[51:62])
+                    @assert length(qf) == length(qr) ==
+                            length(sf) == length(sr) == 12
+
+                    #= align sequence and its mirror, using Fowler2010 score model.
+                    Ignore if there are gaps =#
+                    alignment = BioAlignments.alignment(BioAlignments.pairalign(BioAlignments.GlobalAlignment(), sf, sr, fowler_score_model))
+                    gaps = BioAlignments.count_insertions(alignment) + BioAlignments.count_deletions(alignment)
+                    gaps > 0 && continue
+
+                    #= if two positions in the mirror sequence don't match,
+                    we will keep the one with highest quality. If both positions
+                    have the same quality, ignore. =#
+                    all((collect(sf) .== collect(sr)) .| (qf .≠ qr)) || continue
+                    seq = [q1 ≥ q2 ? n1 : n2 for (n1,n2,q1,q2) in zip(sf,sr,qf,qr)]
+                    @assert length(seq) == 12
+
+                    # convert to protein
+                    protseq = BioSequences.translate(BioSequences.RNASequence(BioSequences.DNASequence(string(join(seq)))))
+                    @assert length(protseq) == 4
+
+                    # write sequence to output file
+                    write(out, string(protseq) * "\n")
+                end
+            end
+        end
+
+        @info "Unique protein counts ..."
+
+        counts = Dict{String,Int}()
+        for line in eachline("$srr.fastq.prot")
+            seq = strip(line)
+            counts[seq] = get(counts, seq, 0) + 1
+        end
+        open("$srr.fastq.prot.counts", "w") do out
+            for (seq, n) in counts
+                write(out, seq * "\t$n\n")
+            end
+        end
     end
+
     write(rubin2017genbio_dir * "/downloaded.txt", "Download complete")
     @info "Rubin 2017 dataset download complete"
 end
