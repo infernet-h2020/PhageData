@@ -5,7 +5,7 @@ image: julia:1.0  # image comes from Docker hub
 #   - julia build_script.jl              # make sure package is available
 
 before_script:
-  - apt-get update -qq && apt-get install -y build-essential
+  - apt-get update -qq && apt-get install -y build-essential zlib1g-dev
 
   # establish an ssh key pair to access other repos
   # see https://docs.gitlab.com/ee/ci/ssh_keys/#ssh-keys-when-using-the-docker-executor
