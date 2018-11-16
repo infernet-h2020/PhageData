@@ -74,7 +74,7 @@ Convert file.rtf to file.txt. Pass file without the .rtf extension.
 """
 function rtf2txt(file::String)
     unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
-    run(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`, stdout="$file.txt"))
+    run(pipeline(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`); stdout="$file.txt"))
     nothing
 end
 
