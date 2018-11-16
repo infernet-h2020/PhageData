@@ -103,9 +103,9 @@ function rubin2017genbio_download()
 
         @info "Converting to protein sequences"
         
-        open("$srr.fastq", "r") do stream
+        open("$rubin2017genbio_dir/$srr.fastq", "r") do stream
             fastq = BioSequences.FASTQ.Reader(stream; fill_ambiguous = nothing)
-            open("$srr.fastq.prot", "w") do out
+            open("$rubin2017genbio_dir/$srr.prot", "w") do out
                 for (iter, r) in enumerate(fastq)
                     # quality scores
                     q = BioSequences.FASTQ.quality(r, :illumina18)
@@ -150,11 +150,11 @@ function rubin2017genbio_download()
         @info "Unique protein counts ..."
 
         counts = Dict{String,Int}()
-        for line in eachline("$srr.fastq.prot")
+        for line in eachline("$rubin2017genbio_dir/$srr.prot")
             seq = strip(line)
             counts[seq] = get(counts, seq, 0) + 1
         end
-        open("$srr.fastq.prot.counts", "w") do out
+        open("$rubin2017genbio_dir/$srr.counts", "w") do out
             for (seq, n) in counts
                 write(out, seq * "\t$n\n")
             end
