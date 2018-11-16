@@ -93,7 +93,7 @@ function rubin2017genbio_download()
     fastqdump = string(@__DIR__, "../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
 
     "alignment score model used by Fowler2010"
-    const fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
+    fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
 
     for id = 87 : 93
         # TODO: consider doing this loop parallel
