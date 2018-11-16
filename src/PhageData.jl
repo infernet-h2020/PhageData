@@ -7,7 +7,9 @@ import BioSequences, BioAlignments
 
 
 export clean, clean!, rmzero
-export boyer2016pnas_pvp, boyer2016pnas_dna
+
+export boyer2016pnas_pvp, boyer2016pnas_dna,
+       rubin2017genbio
 
 
 "base directory containing data"
