@@ -1,10 +1,10 @@
 # acquire sratoolkit
 
-# @info "Downloading sratoolkit for Ubuntu (if you have a different OS, download manually)"
-# @info "This takes a couple of minutes ...."
-# download("https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz",
-#          "sratoolkit.current-ubuntu64.tar.gz")
-# run(`tar -xvzf sratoolkit.current-ubuntu64.tar.gz`)
+@info "Downloading sratoolkit for Ubuntu (if you have a different OS, download manually)"
+@info "This takes a couple of minutes ...."
+download("https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz",
+            "sratoolkit.current-ubuntu64.tar.gz")
+run(`tar -xvzf sratoolkit.current-ubuntu64.tar.gz`)
 @info "sratoolkit installed"
 
 

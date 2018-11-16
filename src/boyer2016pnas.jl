@@ -59,7 +59,7 @@ function boyer2016pnas_download()
         @info "downloading pnas.1517813113.sd$dd.rtf"
         download("http://www.pnas.org/highwire/filestream/621929/field_highwire_adjunct_files/$i/pnas.1517813113.sd$dd.rtf",
                  "$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf")
-        @info "converting to plain text"
+        @info "converting to plain text (can take a while for large files)"
         rtf2txt("$boyer2016pnas_dir/pnas.1517813113.sd$dd")
     end
     write(boyer2016pnas_dir * "/downloaded.txt", "Download complete")
@@ -74,7 +74,7 @@ Convert file.rtf to file.txt. Pass file without the .rtf extension.
 """
 function rtf2txt(file::String)
     unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
-    run(pipeline(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`); stdout="$file.txt"))
+    run(pipeline(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`, `grep -v "^###"`, `grep -v -e '^$'`); stdout="$file.txt"))
     nothing
 end
 
@@ -125,24 +125,26 @@ end
 
 function readdf(path::String)
     df = readdata(path)
-    DataFrames.rename!(df, :counts => :nt_counts)
-    df[:aa_seq] = String.(dna2prot.(df[:nt_seq]))
-    df[:aa_iseq] = [([aa2int[c] for c in sequence]...,) for sequence in df[:aa_seq]]
+    df[:aaseq] = String.(dna2prot.(df[:ntseq]))
+    df[:aaiseq] = [([aa2int[c] for c in sequence]...,) for sequence in df[:aaseq]]
     counts = counts_aa_seq(df)
-    df[:aa_counts] = [counts[s] for s in df[:aa_iseq]]
+    df[:aacounts] = [counts[s] for s in df[:aaiseq]]
     return df
 end
 
 
-readdata(file) = CSV.read(file; delim=';', types=[String, String, Int], comment="#");
+readdata(file) = CSV.read(file; delim=' ', ignorerepeated=true,
+                                types=[String, String, Int], datarow=2,
+                                header=[:fwk, :ntseq, :ntcount]);
+
 dna2prot(seq::String) = BioSequences.translate(BioSequences.RNASequence(
                                                BioSequences.DNASequence(seq));
                                                code = BioSequences.bacterial_plastid_genetic_code)
 
 function counts_aa_seq(df)
-    L = length(first(df[:aa_iseq]))
+    L = length(first(df[:aaiseq]))
     counts = Dict{NTuple{L,Int},Float64}()
-    for (s, n) in zip(df[:aa_iseq], df[:nt_counts])
+    for (s, n) in zip(df[:aaiseq], df[:ntcounts])
         @assert length(s) == L
         counts[s] = get(counts, s, 0.) + float(n)
     end
