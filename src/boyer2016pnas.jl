@@ -54,17 +54,28 @@ end
 "Download the Boyer 2016 PNAS paper dataset"
 function boyer2016pnas_download()
     run(`mkdir -p $boyer2016pnas_dir`)
-    unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
     for i = 2 : 19
         dd = lpad(i, 2, '0')
         @info "downloading pnas.1517813113.sd$dd.rtf"
         download("http://www.pnas.org/highwire/filestream/621929/field_highwire_adjunct_files/$i/pnas.1517813113.sd$dd.rtf",
                  "$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf")
         @info "converting to plain text"
-        run(`$unrtf $boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf \| grep -v "^-" \> $boyer2016pnas_dir/pnas.1517813113.sd$dd.txt`)
+        rtf2txt("$boyer2016pnas_dir/pnas.1517813113.sd$dd")
     end
     write(boyer2016pnas_dir * "/downloaded.txt", "Download complete")
     @info "Boyer 2016 PNAS dataset download complete"
+end
+
+
+"""
+    urtf(file)
+
+Convert file.rtf to file.txt. Pass file without the .rtf extension.
+"""
+function rtf2txt(file::String)
+    unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
+    run(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`, stdout="$file.txt"))
+    nothing
 end
 
 
