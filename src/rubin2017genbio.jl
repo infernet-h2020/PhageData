@@ -6,7 +6,7 @@ const rubin2017genbio_dir = string(@__DIR__, "/../data/rubin2017genbio")
     rubin2017genbio()
 
 Returns dataset from Rubin et al 2017 Genome Biology paper.
-If the dataset has not been downloaded, it downloads the 
+If the dataset has not been downloaded, it downloads the
 original data and processes it (this can take a while).
 """
 function rubin2017genbio()
@@ -36,7 +36,7 @@ function rubin2017genbio()
     S = length(sequences)
     V = 3
     T = 3
-    
+
     # fast linear index of a sequence
     seqidx = Dict(seq => i for (i,seq) in enumerate(sequences_str))
 
@@ -108,18 +108,24 @@ function rubin2017genbio_download()
 end
 
 
-"Process the Rubin2017 paper dataset"
+"""
+    rubin2017genbio_process()
+
+Process the Rubin 2017 paper dataset
+"""
 function rubin2017genbio_process()
     error("Not implemented") # TODO:
     write(rubin2017genbio_dir * "/processed.txt", "Processing complete")
 end
 
 
-"Cleans the Rubin2017 data directory"
+"""
+    rubin2017genbio_clean()
+
+Cleans the Rubin 2017 data directory
+"""
 function rubin2017genbio_clean()
     for f in readdir(rubin2017genbio_dir)
         rm(rubin2017genbio_dir * "/" * f)
     end
 end
-
-

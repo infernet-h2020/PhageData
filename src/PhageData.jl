@@ -1,6 +1,8 @@
 module PhageData
 
 using PhageBase, CSV, DataFrames, Distributed
+
+# import because we don't want conflicts with our Sequence type
 import BioSequences, BioAlignments
 
 

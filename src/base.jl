@@ -18,3 +18,6 @@ seq2str(s::Sequence{21,L}) where {L} = join(get.(Ref(int2aa), s.s, nothing))
 
 "reads a .fastq.prot.counts file into a DataFrame"
 readcounts(path::String) = CSV.read(path; delim='\t', header=["seq", "N"], types=[String, Int])
+
+"number of gaps in an alignment"
+count_gaps(a) = BioAlignments.count_insertions(a) + BioAlignments.count_deletions(a)

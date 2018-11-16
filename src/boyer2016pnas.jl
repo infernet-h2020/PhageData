@@ -63,7 +63,6 @@ function boyer2016pnas_download()
         @info "downloading pnas.1517813113.sd$dd.rtf"
         download("http://www.pnas.org/highwire/filestream/621929/field_highwire_adjunct_files/$i/pnas.1517813113.sd$dd.rtf",
                  "$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf")
-        # rm("$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf")
     end
     write(boyer2016pnas_dir * "/downloaded.txt", "Download complete")
     @info "Boyer 2016 PNAS dataset download complete"
@@ -74,17 +73,8 @@ function boyer2016pnas_process()
     for i = 2 : 19
         dd = lpad(i, 2, '0')
         @info "processing pnas.1517813113.sd$dd.rtf"
-        open("$boyer2016pnas_dir/pnas.1517813113.sd$dd.txt", "w") do out
-            for (no, l) in enumerate(eachline("$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf"))
-                if no == 7
-                    write(out, l[15:end-1] * "\n")
-                elseif no == 9
-                    write(out, l[6:end-1] * "\n")
-                elseif no > 9 && l ≠ "}"
-                    write(out, l[1:end-1] * "\n")
-                end
-            end
-        end
+        unrtf = string(@__DIR__, "../deps/unrtf-0.21.9-build/bin/unrtf")
+        run(`$unrtf $boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf | grep -v "^-" > $boyer2016pnas_dir/pnas.1517813113.sd$dd.txt`)
     end
     write(boyer2016pnas_dir * "/processed.txt", "Processing complete")
     @info "Boyer 2016 PNAS dataset processing complete"
@@ -148,7 +138,7 @@ function readdf(path::String)
 end
 
 
-readdata(file) = CSV.read(file;delim=';', types=[String, String, Int]);
+readdata(file) = CSV.read(file; delim=';', types=[String, String, Int], comment="#");
 dna2prot(seq::String) = BioSequences.translate(BioSequences.RNASequence(
                                                BioSequences.DNASequence(seq));
                                                code = BioSequences.bacterial_plastid_genetic_code)
