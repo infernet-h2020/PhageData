@@ -34,6 +34,7 @@ default:
 #    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"https://github.com/cossio/LambertWExp.jl.git\"))"
 
     - julia -e "import Pkg; Pkg.develop(Pkg.PackageSpec(; path=pwd(), name=\"PhageData\"))"
+    - julia -e "import Pkg; Pkg.build(\"PhageData\")"
     - julia -e "import Pkg; Pkg.test(\"PhageData\"; coverage = true)"
     #- julia coverage_script.jl
 
