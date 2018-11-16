@@ -9,7 +9,8 @@ before_script:
 
   # establish an ssh key pair to access other repos
   # see https://docs.gitlab.com/ee/ci/ssh_keys/#ssh-keys-when-using-the-docker-executor
-  # define $PhageCIGitlabSSHKey in the Gitlab environment variables of this repo.
+  # define $PHAGE_GITLAB_CI_SSH_KEY in the Gitlab environment variables of this repo.
+  # it should be defined for all projects under the PhageDisplayInference group
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
   - echo "$PHAGE_GITLAB_CI_SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
@@ -28,7 +29,7 @@ default:
   script:
 
     # dependencies
-#    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"git@gitlab.com:PhageDisplayInference/PhageBase.jl.git\"))"
+    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"git@gitlab.com:PhageDisplayInference/PhageBase.jl.git\"))"
 #    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"git@gitlab.com:PhageDisplayInference/PhageSim.jl.git\"))"
 #    - julia -e "using Pkg; Pkg.add(Pkg.PackageSpec(; url = \"https://github.com/cossio/LambertWExp.jl.git\"))"
 
