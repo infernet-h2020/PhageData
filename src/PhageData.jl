@@ -4,10 +4,10 @@ using PhageBase, CSV, DataFrames, Distributed
 
 
 #= data location =#
-if haskey(ENV["PHAGEDATAPATH"])
+if haskey(ENV, "PHAGEDATAPATH")
     const DATAPATH = ENV["PHAGEDATAPATH"]
 else
-    error("Please set PHAGEDATAPATH environment variable (or ENV["PHAGEDATAPATH"]) with a directory to place DMS data")
+    error("Please set PHAGEDATAPATH environment variable (or ENV[\"PHAGEDATAPATH\"]) with a directory to place DMS data")
 end
 run(`mkdir -p $DATAPATH`)
 
