@@ -42,10 +42,6 @@ function boyer2016pnas_dna()
         boyer2016pnas_download()
     end
 
-    if !boyer2016pnas_processed()
-        boyer2016pnas_process()
-    end
-
     #= load dataset into Julia =#
     dna = read_three_rounds_counts_DNA()
     seqs = Sequence{21,4}.(sort(unique(s for c in dna for s in keys(c))))
@@ -58,26 +54,17 @@ end
 "Download the Boyer 2016 PNAS paper dataset"
 function boyer2016pnas_download()
     run(`mkdir -p $boyer2016pnas_dir`)
+    unrtf = string(@__DIR__, "../deps/unrtf-0.21.9-build/bin/unrtf")
     for i = 2 : 19
         dd = lpad(i, 2, '0')
         @info "downloading pnas.1517813113.sd$dd.rtf"
         download("http://www.pnas.org/highwire/filestream/621929/field_highwire_adjunct_files/$i/pnas.1517813113.sd$dd.rtf",
                  "$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf")
+        @info "converting to plain text"
+        run(`$unrtf $boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf | grep -v "^-" > $boyer2016pnas_dir/pnas.1517813113.sd$dd.txt`)
     end
     write(boyer2016pnas_dir * "/downloaded.txt", "Download complete")
     @info "Boyer 2016 PNAS dataset download complete"
-end
-
-
-function boyer2016pnas_process()
-    for i = 2 : 19
-        dd = lpad(i, 2, '0')
-        @info "processing pnas.1517813113.sd$dd.rtf"
-        unrtf = string(@__DIR__, "../deps/unrtf-0.21.9-build/bin/unrtf")
-        run(`$unrtf $boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf | grep -v "^-" > $boyer2016pnas_dir/pnas.1517813113.sd$dd.txt`)
-    end
-    write(boyer2016pnas_dir * "/processed.txt", "Processing complete")
-    @info "Boyer 2016 PNAS dataset processing complete"
 end
 
 
@@ -91,8 +78,6 @@ end
 
 "returns true if the Boyer et al 2016 PNAS data has been downloaded"
 boyer2016pnas_downloaded() = isfile(boyer2016pnas_dir * "/downloaded.txt")
-"returns true if the Boyer et al 2016 PNAS has been processed"
-boyer2016pnas_processed() = isfile(boyer2016pnas_dir * "/processed.txt")
 
 
 function read_three_rounds_counts_PVP()
