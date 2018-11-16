@@ -98,8 +98,8 @@ function rubin2017genbio_download()
         # TODO: consider doing this loop parallel
         srr = "SRR42933" * string(id)
 
-        @info "Downloading $srr"
-        run(`$fastqdump -v $srr`)
+        @info "Downloading $srr to $rubin2017genbio_dir"
+        run(`$fastqdump -v -O $rubin2017genbio_dir $srr`)
 
         @info "Converting to protein sequences"
         
