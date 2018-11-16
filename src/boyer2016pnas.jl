@@ -144,7 +144,7 @@ dna2prot(seq::String) = BioSequences.translate(BioSequences.RNASequence(
 function counts_aa_seq(df)
     L = length(first(df[:aaiseq]))
     counts = Dict{NTuple{L,Int},Float64}()
-    for (s, n) in zip(df[:aaiseq], df[:ntcounts])
+    for (s, n) in zip(df[:aaiseq], df[:ntcount])
         @assert length(s) == L
         counts[s] = get(counts, s, 0.) + float(n)
     end
