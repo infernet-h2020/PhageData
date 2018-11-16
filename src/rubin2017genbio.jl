@@ -90,7 +90,7 @@ Download the Rubin 2017 Gen. Bio. paper dataset.
 """
 function rubin2017genbio_download()
     run(`mkdir -p $rubin2017genbio_dir`)
-    fastqdump = string(@__DIR__, "../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
+    fastqdump = string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
 
     "alignment score model used by Fowler2010"
     fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
