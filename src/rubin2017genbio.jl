@@ -1,4 +1,5 @@
-const rubin2017genbio_dir = string(@__DIR__, "/../data/rubin2017genbio")
+const rubin2017genbio_dir = DATAPATH * "/rubin2017genbio"
+run(`mkdir -p $rubin2017genbio_dir`)
 
 
 """
@@ -88,7 +89,6 @@ Download the Rubin 2017 Gen. Bio. paper dataset.
 (This takes a while).
 """
 function rubin2017genbio_download()
-    run(`mkdir -p $rubin2017genbio_dir`)
     fastqdump = string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
 
     "alignment score model used by Fowler2010"

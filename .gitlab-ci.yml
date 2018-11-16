@@ -35,7 +35,7 @@ default:
 
     - julia -e "import Pkg; Pkg.develop(Pkg.PackageSpec(; path=pwd(), name=\"PhageData\"))"
     - julia -e "import Pkg; Pkg.build(\"PhageData\")"
-    - julia -e "import Pkg; Pkg.test(\"PhageData\"; coverage = true)"
+    #- julia -e "import Pkg; Pkg.test(\"PhageData\"; coverage = true)"   # do not test this package, takes too much time
     #- julia coverage_script.jl
 
 # pages:

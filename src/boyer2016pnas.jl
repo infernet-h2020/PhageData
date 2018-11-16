@@ -1,7 +1,8 @@
 import CSV, BioSequences, DataFrames
 
 
-const boyer2016pnas_dir = string(@__DIR__, "/../data/boyer2016pnas")
+const boyer2016pnas_dir = DATAPATH * "/boyer2016pnas"
+run(`mkdir -p $boyer2016pnas_dir`)
 
 
 """
@@ -53,7 +54,6 @@ end
 
 "Download the Boyer 2016 PNAS paper dataset"
 function boyer2016pnas_download()
-    run(`mkdir -p $boyer2016pnas_dir`)
     for i = 2 : 19
         dd = lpad(i, 2, '0')
         @info "downloading pnas.1517813113.sd$dd.rtf"
