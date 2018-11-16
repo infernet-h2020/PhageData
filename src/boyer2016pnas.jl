@@ -61,7 +61,7 @@ function boyer2016pnas_download()
         download("http://www.pnas.org/highwire/filestream/621929/field_highwire_adjunct_files/$i/pnas.1517813113.sd$dd.rtf",
                  "$boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf")
         @info "converting to plain text"
-        run(`$unrtf $boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf \| grep -v "^-" > $boyer2016pnas_dir/pnas.1517813113.sd$dd.txt`)
+        run(`$unrtf $boyer2016pnas_dir/pnas.1517813113.sd$dd.rtf \| grep -v "^-" \> $boyer2016pnas_dir/pnas.1517813113.sd$dd.txt`)
     end
     write(boyer2016pnas_dir * "/downloaded.txt", "Download complete")
     @info "Boyer 2016 PNAS dataset download complete"
