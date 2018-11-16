@@ -1,6 +1,6 @@
 module PhageData
 
-using PhageBase, CSV, DataFrames
+using PhageBase, CSV, DataFrames, Distributed
 import BioSequences, BioAlignments
 
 

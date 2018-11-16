@@ -88,13 +88,20 @@ rubin2017genbio_downloaded() = isfile(rubin2017genbio_dir * "/downloaded.txt")
 rubin2017genbio_processed() = isfile(rubin2017genbio_dir * "/processed.txt")
 
 
-"Download the Rubin 2017 Gen. Bio. paper dataset"
+"""
+    rubin2017genbio_download
+
+Download the Rubin 2017 Gen. Bio. paper dataset.
+(This takes a while).
+"""
 function rubin2017genbio_download()
     run(`mkdir -p $rubin2017genbio_dir`)
+    fastqdump = string(@__DIR__, "../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
     for id = 87 : 93
+        # TODO: consider doing this loop parallel
         srr = "SRR42933" * string(id)
         @info "Downloading $srr"
-        run(`sratoolkit.2.9.2-ubuntu64/bin/fastq-dump -v $srr`)
+        run(`$fastqdump -v $srr`)
     end
     write(rubin2017genbio_dir * "/downloaded.txt", "Download complete")
     @info "Rubin 2017 dataset download complete"
@@ -103,6 +110,7 @@ end
 
 "Process the Rubin2017 paper dataset"
 function rubin2017genbio_process()
+    error("Not implemented") # TODO:
     write(rubin2017genbio_dir * "/processed.txt", "Processing complete")
 end
 
