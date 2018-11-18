@@ -1,6 +1,6 @@
 module PhageData
 
-using PhageBase, CSV, DataFrames, Distributed
+using PhageBase, CSV, DataFrames
 
 
 #= data location =#
@@ -23,8 +23,8 @@ export boyer2016pnas_pvp, boyer2016pnas_dna,
 
 
 include("base.jl")
-include("clean.jl")
 include("rubin2017genbio.jl")
 include("boyer2016pnas.jl")
+include("fowler2010nmeth.jl")
 
 end # module

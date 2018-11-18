@@ -1,4 +1,17 @@
-# acquire sratoolkit
+#= Here we acquire some binaries that are needed to
+download and process the datasets. =#
+
+
+#= All the commands and exectutables we use are 
+for linux.... I don't know how to do it for general
+OSes. =#
+@assert Sys.islinux()
+
+
+#=
+    acquire sratoolkit 
+
+Used to download SRA datasets.=#
 
 @info "Downloading sratoolkit for Ubuntu (if you have a different OS, download manually)"
 @info "This takes a couple of minutes ...."
@@ -8,7 +21,13 @@ run(`tar -xvzf sratoolkit.current-ubuntu64.tar.gz`)
 @info "sratoolkit installed"
 
 
-# acquire unrtf
+#=
+    acquire unrtf 
+
+Used to convert .rtf to .txt. We need this
+because the Boyer 2016 PNAS suppl. files are
+in .rtf format.
+=#
 @info "Downloading unrtf"
 download("https://www.gnu.org/software/unrtf/unrtf-0.21.9.tar.gz",
          "unrtf-0.21.9.tar.gz")

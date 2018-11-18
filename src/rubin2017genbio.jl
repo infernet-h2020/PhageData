@@ -10,21 +10,20 @@ If the dataset has not been downloaded, it downloads the
 original data and processes it (this can take a while).
 """
 function rubin2017genbio()
-    #= if the dataset is not available,
-    download and/or process it =#
+    #= if the dataset is not available, acquire it =#
     if !rubin2017genbio_downloaded()
         rubin2017genbio_download()
     end
 
     #= load dataset into Julia =#
 
-    df00 = readcounts(rubin2017genbio_dir * "/SRR4293387.fastq.prot.counts")  # initial library
-    df13 = readcounts(rubin2017genbio_dir * "/SRR4293388.fastq.prot.counts")  # replicate 1, round 3
-    df16 = readcounts(rubin2017genbio_dir * "/SRR4293389.fastq.prot.counts")  # replicate 1, round 6
-    df23 = readcounts(rubin2017genbio_dir * "/SRR4293390.fastq.prot.counts")  # replicate 2, round 3
-    df26 = readcounts(rubin2017genbio_dir * "/SRR4293391.fastq.prot.counts")  # replicate 2, round 6
-    df33 = readcounts(rubin2017genbio_dir * "/SRR4293392.fastq.prot.counts")  # replicate 3, round 3
-    df36 = readcounts(rubin2017genbio_dir * "/SRR4293393.fastq.prot.counts")  # replicate 3, round 6
+    df00 = readcounts(rubin2017genbio_dir * "/SRR4293387.counts")  # initial library
+    df13 = readcounts(rubin2017genbio_dir * "/SRR4293388.counts")  # replicate 1, round 3
+    df16 = readcounts(rubin2017genbio_dir * "/SRR4293389.counts")  # replicate 1, round 6
+    df23 = readcounts(rubin2017genbio_dir * "/SRR4293390.counts")  # replicate 2, round 3
+    df26 = readcounts(rubin2017genbio_dir * "/SRR4293391.counts")  # replicate 2, round 6
+    df33 = readcounts(rubin2017genbio_dir * "/SRR4293392.counts")  # replicate 3, round 3
+    df36 = readcounts(rubin2017genbio_dir * "/SRR4293393.counts")  # replicate 3, round 6
 
     sequences_str = union(df00[:seq], df13[:seq], df16[:seq], df23[:seq], df26[:seq], df33[:seq], df36[:seq])
     sequences = str2seq.(sequences_str)
@@ -41,37 +40,37 @@ function rubin2017genbio()
     for row in eachrow(df00)
         s = seqidx[row[:seq]]
         # the initial pool reads are shared between replicates
-        N[s,1,1] = N[s,2,1] = N[s,3,1] = row[:N]
+        N[s,1,1] = N[s,2,1] = N[s,3,1] = row[:counts]
     end
 
     for row in eachrow(df13)
         s = seqidx[row[:seq]]
-        N[s,1,2] = row[:N]
+        N[s,1,2] = row[:counts]
     end
 
     for row in eachrow(df16)
         s = seqidx[row[:seq]]
-        N[s,1,3] = row[:N]
+        N[s,1,3] = row[:counts]
     end
 
     for row in eachrow(df23)
         s = seqidx[row[:seq]]
-        N[s,2,2] = row[:N]
+        N[s,2,2] = row[:counts]
     end
 
     for row in eachrow(df26)
         s = seqidx[row[:seq]]
-        N[s,2,3] = row[:N]
+        N[s,2,3] = row[:counts]
     end
 
     for row in eachrow(df33)
         s = seqidx[row[:seq]]
-        N[s,3,2] = row[:N]
+        N[s,3,2] = row[:counts]
     end
 
     for row in eachrow(df36)
         s = seqidx[row[:seq]]
-        N[s,3,3] = row[:N]
+        N[s,3,3] = row[:counts]
     end
 
     Dataset(sequences, N)
@@ -163,17 +162,6 @@ function rubin2017genbio_download()
 
     write(rubin2017genbio_dir * "/downloaded.txt", "Download complete")
     @info "Rubin 2017 dataset download complete"
-end
-
-
-"""
-    rubin2017genbio_process()
-
-Process the Rubin 2017 paper dataset
-"""
-function rubin2017genbio_process()
-    error("Not implemented") # TODO:
-    write(rubin2017genbio_dir * "/processed.txt", "Processing complete")
 end
 
 
