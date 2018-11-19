@@ -68,13 +68,16 @@ end
 
 
 """
-    urtf(file)
+    rtf2txt(file)
 
 Convert file.rtf to file.txt. Pass file without the .rtf extension.
 """
 function rtf2txt(file::String)
-    unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
-    run(pipeline(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`, `grep -v "^###"`, `grep -v -e '^$'`); stdout="$file.txt"))
+    rtf2txtsh = string(@__DIR__, "/../deps/rtf2txt.sh")
+    run(pipeline(pipeline(`bash $rtf2txtsh $file.rtf`, `grep -v "^-"`, `grep -v "^###"`, `grep -v -e '^$'`); stdout="$file.txt"))
+
+    #unrtf = string(@__DIR__, "/../deps/unrtf-0.21.9-build/bin/unrtf")
+    #run(pipeline(pipeline(`$unrtf --text $file.rtf`, `grep -v "^-"`, `grep -v "^###"`, `grep -v -e '^$'`); stdout="$file.txt"))
     nothing
 end
 
@@ -133,8 +136,8 @@ function readdf(path::String)
 end
 
 
-readdata(file) = CSV.read(file; delim=' ', ignorerepeated=true,
-                                types=[String, String, Int], datarow=2,
+readdata(file) = CSV.read(file; delim='\t', ignorerepeated=true,
+                                types=[String, String, Int],
                                 header=[:fwk, :ntseq, :ntcount]);
 
 dna2prot(seq::String) = BioSequences.translate(BioSequences.RNASequence(

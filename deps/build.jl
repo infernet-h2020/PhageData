@@ -27,18 +27,20 @@ run(`tar -xvzf sratoolkit.current-ubuntu64.tar.gz`)
 Used to convert .rtf to .txt. We need this
 because the Boyer 2016 PNAS suppl. files are
 in .rtf format.
+
+I'M NOT USING THIS ANYMORE. USE rtf2txt.sh INSTEAD, WHICH IS MUCH FASTER
 =#
-@info "Downloading unrtf"
-download("https://www.gnu.org/software/unrtf/unrtf-0.21.9.tar.gz",
-         "unrtf-0.21.9.tar.gz")
-run(`tar -xvzf unrtf-0.21.9.tar.gz`)
-run(`mkdir -p unrtf-0.21.9-build`)
-println(pwd())
-cd("unrtf-0.21.9")
-@info "Building unrtf"
-run(`autoreconf -i`)
-run(`./configure --prefix=$(pwd())/../unrtf-0.21.9-build/`)
-run(`make`)
-run(`make install`)
-cd("..")
-@info "unrtf installed"
+# @info "Downloading unrtf"
+# download("https://www.gnu.org/software/unrtf/unrtf-0.21.9.tar.gz",
+#          "unrtf-0.21.9.tar.gz")
+# run(`tar -xvzf unrtf-0.21.9.tar.gz`)
+# run(`mkdir -p unrtf-0.21.9-build`)
+# println(pwd())
+# cd("unrtf-0.21.9")
+# @info "Building unrtf"
+# run(`autoreconf -i`)
+# run(`./configure --prefix=$(pwd())/../unrtf-0.21.9-build/`)
+# run(`make`)
+# run(`make install`)
+# cd("..")
+# @info "unrtf installed"
