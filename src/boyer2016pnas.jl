@@ -1,15 +1,11 @@
-import CSV, BioSequences, DataFrames
-
-
 const boyer2016pnas_dir = DATAPATH * "/boyer2016pnas"
-run(`mkdir -p $boyer2016pnas_dir`)
 
 
 """
     boyer2016pnas_pvp()
 
 Returns PVP dataset from Boyer et al 2016 PNAS paper.
-If the dataset has not been downloaded, it downloads the 
+If the dataset has not been downloaded, it downloads the
 original data (this can take a while).
 """
 function boyer2016pnas_pvp()
@@ -28,12 +24,11 @@ function boyer2016pnas_pvp()
 end
 
 
-
 """
     boyer2016pnas_dna()
 
 Returns DNA dataset from Boyer et al 2016 PNAS paper.
-If the dataset has not been downloaded, it downloads the 
+If the dataset has not been downloaded, it downloads the
 original data (this can take a while).
 """
 function boyer2016pnas_dna()
@@ -54,6 +49,7 @@ end
 
 "Download the Boyer 2016 PNAS paper dataset"
 function boyer2016pnas_download()
+    run(`mkdir -p $boyer2016pnas_dir`)
     for i = 2 : 19
         dd = lpad(i, 2, '0')
         @info "downloading pnas.1517813113.sd$dd.rtf"
@@ -102,8 +98,8 @@ function read_three_rounds_counts_PVP()
     round1df = readdf(F3_PVP_round_1_PATH);
     round2df = readdf(F3_PVP_round_2_PATH);
     round3df = readdf(F3_PVP_round_3_PATH);
-    counts = [counts_aa_seq(round1df), 
-              counts_aa_seq(round2df), 
+    counts = [counts_aa_seq(round1df),
+              counts_aa_seq(round2df),
               counts_aa_seq(round3df)]
 
     return counts
@@ -114,12 +110,12 @@ function read_three_rounds_counts_DNA()
     F3_DNA_round_1_PATH = boyer2016pnas_dir * "/pnas.1517813113.sd02.txt"
     F3_DNA_round_2_PATH = boyer2016pnas_dir * "/pnas.1517813113.sd03.txt"
     F3_DNA_round_3_PATH = boyer2016pnas_dir * "/pnas.1517813113.sd04.txt"
-    
+
     round1df = readdf(F3_DNA_round_1_PATH);
     round2df = readdf(F3_DNA_round_2_PATH);
     round3df = readdf(F3_DNA_round_3_PATH);
-    counts = [counts_aa_seq(round1df), 
-              counts_aa_seq(round2df), 
+    counts = [counts_aa_seq(round1df),
+              counts_aa_seq(round2df),
               counts_aa_seq(round3df)]
     return counts
 end

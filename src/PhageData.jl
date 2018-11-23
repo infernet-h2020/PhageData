@@ -2,6 +2,14 @@ module PhageData
 
 using PhageBase, CSV, DataFrames
 
+# import because we don't want conflicts with our Sequence type
+import BioSequences, BioAlignments
+
+export clean, clean!, rmzero
+
+export boyer2016pnas_pvp, boyer2016pnas_dna,
+rubin2017genbio
+
 
 #= data location =#
 if haskey(ENV, "PHAGEDATAPATH")
@@ -11,15 +19,6 @@ else
 end
 run(`mkdir -p $DATAPATH`)
 
-
-# import because we don't want conflicts with our Sequence type
-import BioSequences, BioAlignments
-
-
-export clean, clean!, rmzero
-
-export boyer2016pnas_pvp, boyer2016pnas_dna,
-       rubin2017genbio
 
 
 include("base.jl")

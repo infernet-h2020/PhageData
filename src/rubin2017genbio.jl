@@ -1,5 +1,4 @@
 const rubin2017genbio_dir = DATAPATH * "/rubin2017genbio"
-run(`mkdir -p $rubin2017genbio_dir`)
 
 
 """
@@ -88,6 +87,7 @@ Download the Rubin 2017 Gen. Bio. paper dataset.
 (This takes a while).
 """
 function rubin2017genbio_download()
+    run(`mkdir -p $rubin2017genbio_dir`)
     fastqdump = string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
 
     "alignment score model used by Fowler2010"
@@ -101,7 +101,7 @@ function rubin2017genbio_download()
         run(`$fastqdump -v -O $rubin2017genbio_dir $srr`)
 
         @info "Converting to protein sequences"
-        
+
         open("$rubin2017genbio_dir/$srr.fastq", "r") do stream
             fastq = BioSequences.FASTQ.Reader(stream; fill_ambiguous = nothing)
             open("$rubin2017genbio_dir/$srr.prot", "w") do out

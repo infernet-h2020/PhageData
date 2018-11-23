@@ -1,5 +1,4 @@
 const fowler2010nmeth_dir = DATAPATH * "/fowler2010nmeth"
-run(`mkdir -p $fowler2010nmeth_dir`)
 
 
 """
@@ -65,6 +64,7 @@ Download the Fowler et al 2010 Nature Methods dataset.
 (This takes a while).
 """
 function fowler2010nmeth_download()
+    run(`mkdir -p $fowler2010nmeth_dir`)
     @info "Downloading Fowler 2010 Nature Methods dataset to $fowler2010nmeth_dir (this only happens the first time you load this dataset)"
     fastqdump = string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
 
@@ -79,7 +79,7 @@ function fowler2010nmeth_download()
         run(`$fastqdump -v -O $fowler2010nmeth_dir $srr`)
 
         @info "Converting to protein sequences"
-        
+
         open("$fowler2010nmeth_dir/$srr.fastq", "r") do stream
             fastq = BioSequences.FASTQ.Reader(stream; fill_ambiguous = nothing)
             open("$fowler2010nmeth_dir/$srr.prot", "w") do out
@@ -94,7 +94,7 @@ function fowler2010nmeth_download()
 
                     # discard if low mean quality
                     mean(qf) ≥ 20 && mean(qr) ≥ 20 || continue
-                    
+
                     s = BioSequences.FASTQ.sequence(r)
                     @assert length(s) == 152
 
@@ -106,7 +106,7 @@ function fowler2010nmeth_download()
                     alignment = BioAlignments.alignment(BioAlignments.pairalign(BioAlignments.GlobalAlignment(), sf, sr, fowler_score_model))
                     gaps = BioAlignments.count_insertions(alignment) + BioAlignments.count_deletions(alignment)
                     gaps > 0 && continue
-                    
+
                     #= if two positions in the mirror sequence don't match,
                     we will keep the one with highest quality. If both positions
                     have the same quality, ignore. =#
