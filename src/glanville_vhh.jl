@@ -30,9 +30,9 @@ function glanville_vhh_cam_pro()
     glanville_pre_CDR3_dict = glavnille_vhh_build_dict(glanville_pre.CDR3)
     glanville_pro_CDR3_dict = glavnille_vhh_build_dict(glanville_pro.CDR3)
 
-    glanville_dataset_CDR1 = build_glanville_dataset(glanville_pre_CDR1_dict, glanville_pro_CDR1_dict)
-    glanville_dataset_CDR2 = build_glanville_dataset(glanville_pre_CDR2_dict, glanville_pro_CDR2_dict)
-    glanville_dataset_CDR3 = build_glanville_dataset(glanville_pre_CDR3_dict, glanville_pro_CDR3_dict)
+    glanville_dataset_CDR1 = glanville_vhh_build_dataset(glanville_pre_CDR1_dict, glanville_pro_CDR1_dict)
+    glanville_dataset_CDR2 = glanville_vhh_build_dataset(glanville_pre_CDR2_dict, glanville_pro_CDR2_dict)
+    glanville_dataset_CDR3 = glanville_vhh_build_dataset(glanville_pre_CDR3_dict, glanville_pro_CDR3_dict)
 
     (CDR1 = glanville_dataset_CDR1,
      CDR2 = glanville_dataset_CDR2,
@@ -66,9 +66,9 @@ function glanville_vhh_cam_myc()
     glanville_pre_CDR3_dict = glavnille_vhh_build_dict(glanville_pre.CDR3)
     glanville_myc_CDR3_dict = glavnille_vhh_build_dict(glanville_myc.CDR3)
 
-    glanville_dataset_CDR1 = build_glanville_dataset(glanville_pre_CDR1_dict, glanville_myc_CDR1_dict)
-    glanville_dataset_CDR2 = build_glanville_dataset(glanville_pre_CDR2_dict, glanville_myc_CDR2_dict)
-    glanville_dataset_CDR3 = build_glanville_dataset(glanville_pre_CDR3_dict, glanville_myc_CDR3_dict)
+    glanville_dataset_CDR1 = glanville_vhh_build_dataset(glanville_pre_CDR1_dict, glanville_myc_CDR1_dict)
+    glanville_dataset_CDR2 = glanville_vhh_build_dataset(glanville_pre_CDR2_dict, glanville_myc_CDR2_dict)
+    glanville_dataset_CDR3 = glanville_vhh_build_dataset(glanville_pre_CDR3_dict, glanville_myc_CDR3_dict)
 
     (CDR1 = glanville_dataset_CDR1,
      CDR2 = glanville_dataset_CDR2,
