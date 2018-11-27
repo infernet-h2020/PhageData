@@ -1,6 +1,6 @@
 import LibGit2
 
-const glanville_vhh_dir = DATAPATH * "/glanville"
+const glanville_vhh_dir = DATAPATH * "/glanville_vhh"
 
 
 """
