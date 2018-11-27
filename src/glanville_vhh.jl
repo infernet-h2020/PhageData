@@ -20,8 +20,8 @@ function glanville_vhh_cam_pro()
     end
 
     #= load dataset into Julia =#
-    glanville_pre = glanville_vhh_load_CDRs("/home/cossio/work/PhageDisplayInference/data-old/Glanville/processing/VHH-Cam_PreSelect_A_md07_md04.dna.fa_CDRs.txt");
-    glanville_pro = glanville_vhh_load_CDRs("/home/cossio/work/PhageDisplayInference/data-old/Glanville/processing/VHH-Cam_ProA_A_md09_md04.dna.fa_CDRs.txt");
+    glanville_pre = glanville_vhh_load_CDRs(glanville_vhh_dir * "/VHH-Cam_PreSelect_A_md07_md04.dna.fa_CDRs.txt");
+    glanville_pro = glanville_vhh_load_CDRs(glanville_vhh_dir * "/VHH-Cam_ProA_A_md09_md04.dna.fa_CDRs.txt");
 
     glanville_pre_CDR1_dict = glavnille_vhh_build_dict(glanville_pre.CDR1)
     glanville_pro_CDR1_dict = glavnille_vhh_build_dict(glanville_pro.CDR1)
@@ -56,8 +56,8 @@ function glanville_vhh_cam_myc()
     end
 
     #= load dataset into Julia =#
-    glanville_pre = glanville_vhh_load_CDRs("/home/cossio/work/PhageDisplayInference/data-old/Glanville/processing/VHH-Cam_PreSelect_A_md07_md04.dna.fa_CDRs.txt");
-    glanville_myc = glanville_vhh_load_CDRs("/home/cossio/work/PhageDisplayInference/data-old/Glanville/processing/VHH-Cam_Myc_A_md11_md04.dna.fa_CDRs.txt");
+    glanville_pre = glanville_vhh_load_CDRs(glanville_vhh_dir * "/VHH-Cam_PreSelect_A_md07_md04.dna.fa_CDRs.txt");
+    glanville_myc = glanville_vhh_load_CDRs(glanville_vhh_dir * "/VHH-Cam_Myc_A_md11_md04.dna.fa_CDRs.txt");
 
     glanville_pre_CDR1_dict = glavnille_vhh_build_dict(glanville_pre.CDR1)
     glanville_myc_CDR1_dict = glavnille_vhh_build_dict(glanville_myc.CDR1)
