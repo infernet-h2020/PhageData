@@ -25,5 +25,6 @@ include("base.jl")
 include("rubin2017genbio.jl")
 include("boyer2016pnas.jl")
 include("fowler2010nmeth.jl")
+include("glanville_vhh.jl")
 
 end # module
