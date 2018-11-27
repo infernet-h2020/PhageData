@@ -25,13 +25,18 @@ end
 "Download the Boyer 2016 PNAS paper dataset"
 function glanville_download()
     # if proxy, clone manually instead of calling this function!
+    
+    run(`mkdir -p $glanville_vhh_dir`)
+    process_script = string(pathof(PhageData) * "/deps/process_glanville.sh")
+
     LibGit2.clone("git@gitlab.com:PhageDisplayInference/GlanvilleVHHData.git",
                   glanville_vhh_dir)
+
     cd(glanville_vhh_dir) do
         run(`tar -xvzf all-VHH-data.tgz -C $(pwd())`)
-        process_script = string(pathof(PhageData) * "/deps/process_glanville.sh")
         run(`$process_script`)
     end
+
     write(glanville_vhh_dir * "/downloaded.txt", "Download complete")
 end
 
