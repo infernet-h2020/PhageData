@@ -4,17 +4,17 @@ const glanville_vhh_dir = DATAPATH * "/glanville_vhh"
 
 
 """
-    glanville_cam()
+    glanville_vhh_cam()
 
 Returns Glanville Cam dataset.
 If the dataset has not been downloaded, it downloads the
 original data (this can take a while, but is only done once).
 """
-function glanville_cam()
+function glanville_vhh_cam()
     #= if the dataset is not available,
     download and/or process it =#
-    if !glanville_downloaded()
-        glanville_download()
+    if !glanville_vhh_downloaded()
+        glanville_vhh_download()
     end
 
     #= load dataset into Julia =#
@@ -22,12 +22,12 @@ function glanville_cam()
 end
 
 
-"Download the Boyer 2016 PNAS paper dataset"
-function glanville_download()
+"Download the Glanville VHH data"
+function glanville_vhh_download()
     # if proxy, clone manually instead of calling this function!
     
     run(`mkdir -p $glanville_vhh_dir`)
-    process_script = string(pathof(PhageData) * "/deps/process_glanville.sh")
+    process_script = string(dirname(pathof(PhageData)) * "/../deps/process_glanville.sh")
 
     LibGit2.clone("git@gitlab.com:PhageDisplayInference/GlanvilleVHHData.git",
                   glanville_vhh_dir)
@@ -41,5 +41,5 @@ function glanville_download()
 end
 
 
-"returns true if the Glanvile data has been downloaded"
-glanville_downloaded() = isfile(glanville_vhh_dir * "/downloaded.txt")
+"returns true if the Glanvile VHH data has been downloaded"
+glanville_vhh_downloaded() = isfile(glanville_vhh_dir * "/downloaded.txt")
