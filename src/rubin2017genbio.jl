@@ -1,17 +1,19 @@
 const rubin2017genbio_dir = DATAPATH * "/rubin2017genbio"
 
-
 """
-    rubin2017genbio()
+    rubin2017genbio_c1()
 
 Returns dataset from Rubin et al 2017 Genome Biology paper.
 If the dataset has not been downloaded, it downloads the
 original data and processes it (this can take a while).
 """
-function rubin2017genbio()
+function rubin2017genbio_c1()
     #= if the dataset is not available, acquire it =#
     if !rubin2017genbio_downloaded()
         rubin2017genbio_download()
+    end
+    if !rubin2017genbio_processed()
+        rubin2017genbio_process()
     end
 
     #= load dataset into Julia =#
@@ -31,7 +33,7 @@ function rubin2017genbio()
     V = 3
     T = 3
 
-    # fast linear index of a sequence
+    # linear index of each sequence
     seqidx = Dict(seq => i for (i,seq) in enumerate(sequences_str))
 
     N = zeros(Int, S, V, T)
@@ -75,10 +77,10 @@ function rubin2017genbio()
     Dataset(sequences, N)
 end
 
-
 "returns true if the Rubin2017 data has been downloaded"
 rubin2017genbio_downloaded() = isfile(rubin2017genbio_dir * "/downloaded.txt")
-
+"returns true if the Rubin2017 data has been processed"
+rubin2017genbio_processed() = isfile(rubin2017genbio_dir * "/processed.txt")
 
 """
     rubin2017genbio_download
@@ -89,19 +91,28 @@ Download the Rubin 2017 Gen. Bio. paper dataset.
 function rubin2017genbio_download()
     run(`mkdir -p $rubin2017genbio_dir`)
     fastqdump = string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
-
-    "alignment score model used by Fowler2010"
-    fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
-
     for id = 87 : 93
         # TODO: consider doing this loop parallel
         srr = "SRR42933" * string(id)
 
         @info "Downloading $srr to $rubin2017genbio_dir"
         run(`$fastqdump -v -O $rubin2017genbio_dir $srr`)
+    end
+    write(rubin2017genbio_dir * "/downloaded.txt", "Download complete")
+    @info "Rubin 2017 dataset download complete"
+end
 
+"""
+    rubin2017genbio_process()
+
+Process the Rubin 2017 Gen. Bio. paper dataset.
+"""
+function rubin2017genbio_process()
+    "alignment score model used by Fowler2010"
+    fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
+    for id = 87 : 93
+        srr = "SRR42933" * string(id)
         @info "Converting to protein sequences"
-
         open("$rubin2017genbio_dir/$srr.fastq", "r") do stream
             fastq = BioSequences.FASTQ.Reader(stream; fill_ambiguous = nothing)
             open("$rubin2017genbio_dir/$srr.prot", "w") do out
@@ -147,7 +158,6 @@ function rubin2017genbio_download()
         end
 
         @info "Unique protein counts ..."
-
         counts = Dict{String,Int}()
         for line in eachline("$rubin2017genbio_dir/$srr.prot")
             seq = strip(line)
@@ -160,10 +170,9 @@ function rubin2017genbio_download()
         end
     end
 
-    write(rubin2017genbio_dir * "/downloaded.txt", "Download complete")
-    @info "Rubin 2017 dataset download complete"
+    write(rubin2017genbio_dir * "/processed.txt", "Processing complete")
+    @info "Rubin 2017 dataset processing complete"
 end
-
 
 """
     rubin2017genbio_clean()
