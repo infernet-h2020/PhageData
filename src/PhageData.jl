@@ -1,14 +1,13 @@
 module PhageData
 
-using PhageBase, CSV, DataFrames
+using PhageBase, CSV, DataFrames, ArgCheck, ExcelFiles
 
 # import because we don't want conflicts with our Sequence type
 import BioSequences, BioAlignments
 
 export clean, clean!, rmzero
-
-export boyer2016pnas_pvp, boyer2016pnas_dna,
-rubin2017genbio
+export boyer2016pnas_pvp, boyer2016pnas_dna, rubin2017genbio,
+       olson2014currbio_gb1
 
 
 #= data location =#
@@ -24,6 +23,7 @@ include("base.jl")
 include("rubin2017genbio.jl")
 include("boyer2016pnas.jl")
 include("fowler2010nmeth.jl")
-include("glanville_vhh.jl")
+include("olson2014currbio.jl")
+#include("glanville_vhh.jl")   # needs DatasetNoAln ..
 
 end # module
