@@ -38,9 +38,9 @@ function rubin2017genbio_c1()
 
     N = zeros(Int, S, V, T)
 
+    # the initial pool reads are shared between replicates
     for row in eachrow(df00)
         s = seqidx[row[:seq]]
-        # the initial pool reads are shared between replicates
         N[s,1,1] = N[s,2,1] = N[s,3,1] = row[:counts]
     end
 
