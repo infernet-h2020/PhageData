@@ -66,9 +66,8 @@ end
 "Download the GB1 dataset from Olson et al 2014 Current Biology paper"
 function olson2014currbio_download()
     run(`mkdir -p $olson2014currbio_dir`)
-    error("not implemented!")
     @info "downloading Olson et al 2014 Current Biology dataset"
-    download("", # TODO: update url
+    download("https://www.cell.com/cms/10.1016/j.cub.2014.09.072/attachment/3a36211d-bddd-43e3-bf42-a6721f93a18b/mmc2.xlsx",
              "$olson2014currbio_dir/mmc2.xlsx")
     write(olson2014currbio_dir * "/downloaded.txt", "Download complete")
     @info "Olson et al 2014 Current Biology dataset download complete"
