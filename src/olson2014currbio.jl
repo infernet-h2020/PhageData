@@ -71,7 +71,7 @@ function olson2014currbio_download()
     file_path = olson2014currbio_dir * "/mmc2.xlsx"
     run(`curl -o $file_path $url`)
     if bytes2hex(open(sha2_256, file_path)) ≠ "e912c93cf3d1d95a7d8fc5bb8e8d50a523eb9398c51613b2a74693f07a50fe29"
-        olson2014currbio_clean()
+        #olson2014currbio_clean()
         error("Olson et al 2014 dataset download failed")
         return
     end
