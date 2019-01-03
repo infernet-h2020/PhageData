@@ -1,6 +1,6 @@
 module PhageData
 
-using PhageBase, CSV, DataFrames, ArgCheck, ExcelFiles
+using PhageBase, CSV, DataFrames, ArgCheck, ExcelFiles, SHA
 
 # import because we don't want conflicts with our Sequence type
 import BioSequences, BioAlignments
