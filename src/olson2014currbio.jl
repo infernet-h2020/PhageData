@@ -69,7 +69,7 @@ function olson2014currbio_download()
     @info "downloading Olson et al 2014 Current Biology dataset"
     url = "https://www.cell.com/cms/10.1016/j.cub.2014.09.072/attachment/3a36211d-bddd-43e3-bf42-a6721f93a18b/mmc2.xlsx"
     run(`wget -o $olson2014currbio_dir/mmc2.xlsx $url`)
-    write(olson2014currbio_dir * "/downloaded.txt", "Download complete")
+    write(olson2014currbio_dir * "/downloaded.txt", "Download complete\n")
     @info "Olson et al 2014 Current Biology dataset download complete"
     return nothing
 end
