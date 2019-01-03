@@ -69,7 +69,7 @@ function olson2014currbio_download()
     @info "downloading Olson et al 2014 Current Biology dataset"
     url = "https://www.cell.com/cms/10.1016/j.cub.2014.09.072/attachment/3a36211d-bddd-43e3-bf42-a6721f93a18b/mmc2.xlsx"
     file_path = olson2014currbio_dir * "/mmc2.xlsx"
-    run(`wget -o $file_path $url`)
+    run(`curl -o $file_path $url`)
     if bytes2hex(open(sha2_256, file_path)) ≠ "e912c93cf3d1d95a7d8fc5bb8e8d50a523eb9398c51613b2a74693f07a50fe29"
         olson2014currbio_clean()
         error("Olson et al 2014 dataset download failed")
