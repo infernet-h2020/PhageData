@@ -3,6 +3,7 @@
 [![pipeline status](https://gitlab.com/PhageDisplayInference/PhageData.jl/badges/master/pipeline.svg)](https://gitlab.com/PhageDisplayInference/PhageData.jl/commits/master)
 
 Automatically acquire and process data sets to test phage display inference algorithms.
+Install https://github.com/infernet-h2020/PhageBase.jl before using this.
 
 `boyer2016pnas_pvp()` and `boyer2016pnas_dna()` acquire the datasets from the paper http://www.pnas.org/content/113/13/3482.
 
