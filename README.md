@@ -23,5 +23,5 @@ This work is supported by INFERNET: "New algorithms for inference and optimizati
 ![logo] 
 
 
-[logo]: ./image/INFERNET_Wordmark_HR.png
-[flag]: ./image/eu_flag.jpg
+[logo]: http://www.infernet.eu/wp-content/uploads/2017/03/INFERNET_Wordmark_HR.png
+[flag]: http://www.infernet.eu/wp-content/uploads/2017/03/flag_yellow_high.jpg
