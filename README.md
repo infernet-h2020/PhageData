@@ -25,5 +25,3 @@ This work is supported by INFERNET: "New algorithms for inference and optimizati
 
 [flag]: (images/eu_flag.jpg){:width="50%", width="50%"}
 
-#[logo]: http://www.infernet.eu/wp-content/uploads/2017/03/INFERNET_Wordmark_HR.png
-#[flag]: http://www.infernet.eu/wp-content/uploads/2017/03/flag_yellow_high.jpg
