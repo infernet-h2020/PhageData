@@ -23,5 +23,5 @@ This work is supported by INFERNET: "New algorithms for inference and optimizati
 ![flag] 
 
 
-[flag]: (images/eu_flag.jpg){:width="50%", width="50%"}
+[flag]: (./images/eu_flag.jpg){:width="50%", width="50%"}
 
