@@ -18,6 +18,9 @@ Install https://github.com/infernet-h2020/PhageBase.jl before using this.
 
 `rubin2017genbio_c1()` acquires the dataset from https://doi.org/10.1186/s13059-017-1272-5.
 
+<p align="center">
+<img src="http://www.infernet.eu/wp-content/uploads/2017/03/INFERNET_Wordmark_HR.png" width="20" height="5">
+</p>
 
 This work is supported by INFERNET: "New algorithms for inference and optimization from large-scale biological data". The INFERNET project is co-funded by the European Union’s H2020 research and innovation programme under the Marie Sklodowska-Curie grant agreement number 734439
 
