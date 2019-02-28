@@ -5,8 +5,8 @@ download and process the datasets. =#
 #= All the commands and exectutables we use are 
 for linux.... I don't know how to do it for general
 OSes. =#
-# @assert Sys.islinux() || Sys.isapple()
 
+@assert Sys.islinux() || Sys.isapple()
 
 #=
     acquire sratoolkit 
