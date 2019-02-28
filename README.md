@@ -21,6 +21,7 @@ Install https://github.com/infernet-h2020/PhageBase.jl before using this.
 
 This work is supported by INFERNET: "New algorithms for inference and optimization from large-scale biological data". The INFERNET project is co-funded by the European Union’s H2020 research and innovation programme under the Marie Sklodowska-Curie grant agreement number 734439
 
-<img src="http://www.infernet.eu/wp-content/uploads/2017/03/flag_yellow_high.jpg" width="40" height="30" class=center>
-
+<p align="center">
+<img src="http://www.infernet.eu/wp-content/uploads/2017/03/flag_yellow_high.jpg" width="40" height="30">
+</p>
 
