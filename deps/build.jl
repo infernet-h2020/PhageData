@@ -15,9 +15,17 @@ Used to download SRA datasets.=#
 
 @info "Downloading sratoolkit for Ubuntu (if you have a different OS, download manually)"
 @info "This takes a couple of minutes ...."
-download("https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz",
-            "sratoolkit.current-ubuntu64.tar.gz")
-run(`tar -xvzf sratoolkit.current-ubuntu64.tar.gz`)
+
+if Sys.islinux()
+    download("https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz", "sratoolkit.current-ubuntu64.tar.gz")
+    run(`tar -xvzf sratoolkit.current-ubuntu64.tar.gz`)
+elseif Sys.isapple()
+    download("https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-mac64.tar.gz", "sratoolkit.current-mac64.tar.gz")
+    run(`tar -xvzf sratoolkit.current-mac64.tar.gz`)
+else
+    error("should not end up here as only linux and apple are set")
+end
+
 @info "sratoolkit installed"
 
 
