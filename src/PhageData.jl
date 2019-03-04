@@ -19,6 +19,7 @@ else
 end
 run(`mkdir -p $DATAPATH`)
 
+printsyled("environment variable DATAPATH set to $(ENV["PHAGEDATAPATH"])")
 
 include("base.jl")
 include("rubin2017genbio.jl")
