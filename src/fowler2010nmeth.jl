@@ -69,7 +69,7 @@ function fowler2010nmeth_download()
     fastqdump = if Sys.islinux()
         string(@__DIR__, "/../deps/sratoolkit.2.9.4-ubuntu64/bin/fastq-dump")
     elseif Sys.isapple()
-        string(@__DIR__, "/../deps/sratoolkit.2.9.4-mac64/bin/fastq-dump")
+        string(@__DIR__, "/../deps/sratoolkit.2.9.4-1-mac64/bin/fastq-dump")
     else
         error("only linux and macos supprted")
     end
