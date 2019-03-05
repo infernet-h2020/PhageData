@@ -90,7 +90,12 @@ Download the Rubin 2017 Gen. Bio. paper dataset.
 """
 function rubin2017genbio_download()
     run(`mkdir -p $rubin2017genbio_dir`)
-    fastqdump = string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
+
+    fastqdump = if Sys.islinux()
+        string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
+    elseif Sys.isapple()
+        string(@__DIR__, "/../deps/sratoolkit.2.9.4-mac64/bin/fastq-dump")
+    end
     for id = 87 : 93
         # TODO: consider doing this loop parallel
         srr = "SRR42933" * string(id)
