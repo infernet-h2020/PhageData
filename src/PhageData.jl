@@ -21,6 +21,8 @@ run(`mkdir -p $DATAPATH`)
 
 printstyled("environment variable DATAPATH set to $(ENV["PHAGEDATAPATH"])")
 
+const sradir="sradir"
+
 include("base.jl")
 include("rubin2017genbio.jl")
 include("boyer2016pnas.jl")

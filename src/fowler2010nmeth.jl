@@ -1,5 +1,4 @@
-const fowler2010nmeth_dir = DATAPATH * "fowler2010nmeth"
-
+const fowler2010nmeth_dir = DATAPATH * "/fowler2010nmeth"
 
 """
     fowler2010nmeth()
@@ -66,13 +65,9 @@ Download the Fowler et al 2010 Nature Methods dataset.
 function fowler2010nmeth_download()
     run(`mkdir -p $fowler2010nmeth_dir`)
     @info "Downloading Fowler 2010 Nature Methods dataset to $fowler2010nmeth_dir (this only happens the first time you load this dataset)"
-    fastqdump = if Sys.islinux()
-        string(@__DIR__, "/../deps/sratoolkit.2.9.4-ubuntu64/bin/fastq-dump")
-    elseif Sys.isapple()
-        string(@__DIR__, "/../deps/sratoolkit.2.9.4-1-mac64/bin/fastq-dump")
-    else
-        error("only linux and macos supprted")
-    end
+
+    fastqdump = string(@__DIR__, "/../deps/sradir/bin/fastq-dump")
+
     "alignment score model used by Fowler2010"
     fowler_score_model = BioAlignments.AffineGapScoreModel(gap_open=-3, gap_extend=-1, mismatch=-1, match=2);
 

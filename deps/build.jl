@@ -6,7 +6,6 @@ download and process the datasets. =#
 for linux.... I don't know how to do it for general
 OSes. =#
 
-@info "sono qui!"
 @info pwd()
 
 @assert Sys.islinux() || Sys.isapple()
@@ -28,6 +27,10 @@ elseif Sys.isapple()
 else
     error("should not end up here as only linux and apple are set")
 end
+
+namesradir = filter(x->occursin("sratoolkit",x)*isdir(x),readdir())[1]
+
+run(`ln -s $namesradir sradir`)
 
 @info "sratoolkit installed"
 
