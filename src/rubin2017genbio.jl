@@ -94,7 +94,7 @@ function rubin2017genbio_download()
     fastqdump = if Sys.islinux()
         string(@__DIR__, "/../deps/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump")
     elseif Sys.isapple()
-        string(@__DIR__, "/../deps/sratoolkit.2.9.4-mac64/bin/fastq-dump")
+        string(@__DIR__, "/../deps/sratoolkit.2.9.4-1-mac64/bin/fastq-dump")
     end
     for id = 87 : 93
         # TODO: consider doing this loop parallel
