@@ -8,7 +8,7 @@ import BioSequences, BioAlignments
 
 export clean, clean!, rmzero
 export boyer2016pnas_pvp, boyer2016pnas_dna, rubin2017genbio_c1,
-       olson2014currbio_gb1
+       olson2014currbio_gb1, fowler2010nmeth
 
 
 #= data location =#
