@@ -6,6 +6,8 @@ download and process the datasets. =#
 for linux.... I don't know how to do it for general
 OSes. =#
 
+@info "sono qui!"
+
 @assert Sys.islinux() || Sys.isapple()
 
 #=
