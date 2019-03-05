@@ -7,7 +7,7 @@ for linux.... I don't know how to do it for general
 OSes. =#
 
 @info "sono qui!"
-println(pwd())
+@info pwd()
 
 @assert Sys.islinux() || Sys.isapple()
 
