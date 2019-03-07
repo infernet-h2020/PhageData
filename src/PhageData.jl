@@ -20,7 +20,7 @@ else
 end
 run(`mkdir -p $DATAPATH`)
 
-printstyled("environment variable DATAPATH set to $(ENV["PHAGEDATAPATH"])")
+@info "environment variable DATAPATH set to $(ENV["PHAGEDATAPATH"])"
 
 const sradir="sradir"
 
