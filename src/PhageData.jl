@@ -1,6 +1,7 @@
 module PhageData
 
 using PhageBase  # defines Dataset, Sequence
+using Statistics
 using CSV, DataFrames, ArgCheck, ExcelFiles, SHA
 
 # import because we don't want conflicts with our Sequence type
