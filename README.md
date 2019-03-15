@@ -11,7 +11,7 @@ Install https://github.com/infernet-h2020/PhageBase.jl before using this. To ins
 
 The installation also requires the user to specify a directory (with writing access) where databases are stored. This can be accomplished by setting the environment variable `PHAGEDATAPATH` to the directory where will be stored. This can be done either:
 
-* setting the variable in the `.julia/environments/startup.jl`  adding  the following instruction `ENV["PHAGEDATAPATH"]="/path/to/the/dir"`. The `startup.jl` file might not exists, and in this case it should be created. 
+* setting the variable in the `.julia/environments/startup.jl`  adding  the following instruction `ENV["PHAGEDATAPATH"]="/path/to/the/dir"`. The `startup.jl` file might not exist, and in this case it should be created. 
 * setting the variable in the `.bashrc` file (or any startup file for your shell) with `export PHAGEDATAPATH=/Users/pagnani/PHAGE_DATA/` (for Linux, and MacOS).
 
 ## Usage
