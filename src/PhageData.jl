@@ -16,7 +16,7 @@ export boyer2016pnas_pvp, boyer2016pnas_dna, rubin2017genbio_c1,
 if haskey(ENV, "PHAGEDATAPATH")
     const DATAPATH = ENV["PHAGEDATAPATH"]
 else
-    error("Please set PHAGEDATAPATH environment variable (or ENV[\"PHAGEDATAPATH\"]) with a directory to place DMS data")
+    error("Please set PHAGEDATAPATH environment variable (or ENV[\"PHAGEDATAPATH\"]) with a directory to place DMS data. See README.md for more details.")
 end
 run(`mkdir -p $DATAPATH`)
 
