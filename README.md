@@ -9,7 +9,7 @@ A [Julia](https://julialang.org) package for download and process sequencing dat
 
 Install https://github.com/infernet-h2020/PhageBase.jl before using this. To install this package from Julia REPL type `]` to enter into the Package Manager prompt and then type `add https://github.com/infernet-h2020/PhageBase.jl`.
 
-The installation also require the user to specify a directory (with writing access) where databases are stored. This can be accomplished by setting the environment variable `PHAGEDATAPATH` to the directory where will be stored. This can be done either:
+The installation also requires the user to specify a directory (with writing access) where databases are stored. This can be accomplished by setting the environment variable `PHAGEDATAPATH` to the directory where will be stored. This can be done either:
 
 * setting the variable in the `.julia/environments/startup.jl`  adding  the following instruction `ENV["PHAGEDATAPATH"]="/path/to/the/dir"`. The `startup.jl` file might not exists, and in this case it should be created. 
 * setting the variable in the `.bashrc` file (or any startup file for your shell) with `export PHAGEDATAPATH=/Users/pagnani/PHAGE_DATA/` (for Linux, and MacOS).
