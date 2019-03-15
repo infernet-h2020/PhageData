@@ -105,9 +105,9 @@ version = "1.2.0"
 
 [[DataFrames]]
 deps = ["CategoricalArrays", "CodecZlib", "Compat", "DataStreams", "Dates", "InteractiveUtils", "IteratorInterfaceExtensions", "LinearAlgebra", "Missings", "Printf", "Random", "Reexport", "SortingAlgorithms", "Statistics", "StatsBase", "TableTraits", "Tables", "Test", "TranscodingStreams", "Unicode", "WeakRefStrings"]
-git-tree-sha1 = "7e032a76f3455e38660ac456791951ac2d0b1e70"
+git-tree-sha1 = "9cfed75401d25d281076eb5d82de148ac2933f9e"
 uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "0.16.0"
+version = "0.17.1"
 
 [[DataStreams]]
 deps = ["Dates", "Missings", "Test", "WeakRefStrings"]
@@ -140,10 +140,10 @@ deps = ["LinearAlgebra", "Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[ExcelFiles]]
-deps = ["DataValues", "Dates", "ExcelReaders", "FileIO", "IterableTables", "IteratorInterfaceExtensions", "Printf", "TableShowUtils", "TableTraits", "TableTraitsUtils", "Test", "XLSX"]
-git-tree-sha1 = "408d45f02f13894ae503c6ffbf226eb24b8cc681"
+deps = ["DataValues", "Dates", "ExcelReaders", "FileIO", "IterableTables", "IteratorInterfaceExtensions", "Printf", "PyCall", "TableShowUtils", "TableTraits", "TableTraitsUtils", "Test", "XLSX"]
+git-tree-sha1 = "e157d1ea01f94df971e0515b0fba322cbc812f14"
 uuid = "89b67f3b-d1aa-5f6f-9ca4-282e8d98620d"
-version = "0.7.0"
+version = "0.9.1"
 
 [[ExcelReaders]]
 deps = ["DataValues", "Dates", "PyCall", "Test"]
@@ -376,9 +376,9 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [[TranscodingStreams]]
 deps = ["Pkg", "Random", "Test"]
-git-tree-sha1 = "8a032ceb5cf7a28bf1bdb77746b250b9e9fda565"
+git-tree-sha1 = "90f845c65c50bc57d6ffc815dbab2a4003ccf75c"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.9.0"
+version = "0.9.1"
 
 [[Twiddle]]
 deps = ["Test"]
@@ -413,9 +413,9 @@ version = "0.5.7"
 
 [[XLSX]]
 deps = ["Dates", "EzXML", "Printf", "Test", "ZipFile"]
-git-tree-sha1 = "61807575984903b21b6efe4b645253a389415c2b"
+git-tree-sha1 = "f906a228a6df5447f007c2b2360206a01e4d34de"
 uuid = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
-version = "0.4.6"
+version = "0.4.7"
 
 [[YAML]]
 deps = ["Codecs", "Compat"]

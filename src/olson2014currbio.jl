@@ -54,11 +54,14 @@ function olson2014currbio_gb1()
         Sequence{A,L}(mutseq)
     end
 
-    sequences = vcat(single_muts, double_muts)
+    wtinput = convert(Int, df[2,20])
+    wtsel = convert(Int, df[2,21])
+
+    sequences = vcat(wtseq, single_muts, double_muts)
 
     counts = zeros(Int, length(sequences), 1, 2);
-    counts[:,1,1] .= [input_count; input_count_double]
-    counts[:,1,2] .= [sel_count; sel_count_double];
+    counts[:,1,1] .= [wtinput; input_count; input_count_double]
+    counts[:,1,2] .= [wtsel; sel_count; sel_count_double];
 
     return Dataset(sequences, counts)
 end
