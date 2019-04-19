@@ -1,4 +1,4 @@
-# amino acid letter to integer
+# amino acid letter to integer (alphabetical order, gap is last)
 const aa2int = Dict('A' => 1, 'C' => 2, 'D' => 3, 'E' => 4, 'F' => 5,
                     'G' => 6, 'H' => 7, 'I' => 8, 'K' => 9, 'L' => 10,
                     'M' => 11, 'N' => 12, 'P' => 13, 'Q' => 14, 'R' => 15,
