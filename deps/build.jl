@@ -8,7 +8,7 @@ OSes. =#
 
 @info pwd()
 
-@assert Sys.islinux() || Sys.isapple()
+#@assert Sys.islinux() || Sys.isapple()
 
 #=
     acquire sratoolkit 
