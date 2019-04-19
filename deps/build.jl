@@ -28,7 +28,7 @@ else
     error("Unsupported OS detected. Only Linux and Mac are supported.")
 end
 
-namesradir = filter(x->occursin("sratoolkit",x)*isdir(x),readdir())[1]
+namesradir = filter(x -> occursin("sratoolkit", x) * isdir(x), readdir())[1]
 
 run(`ln -s $namesradir sradir`)
 
