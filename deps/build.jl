@@ -15,7 +15,7 @@ OSes. =#
 
 Used to download SRA datasets.=#
 
-@info "Downloading sratoolkit for Ubuntu (if you have a different OS, download manually)"
+@info "Downloading sratoolkit"
 @info "This takes a couple of minutes ...."
 
 if Sys.islinux()
@@ -25,7 +25,7 @@ elseif Sys.isapple()
     download("https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-mac64.tar.gz", "sratoolkit.current-mac64.tar.gz")
     run(`tar -xvzf sratoolkit.current-mac64.tar.gz`)
 else
-    error("should not end up here as only linux and apple are set")
+    error("Unsupported OS detected. Only Linux and Mac are supported.")
 end
 
 namesradir = filter(x->occursin("sratoolkit",x)*isdir(x),readdir())[1]
